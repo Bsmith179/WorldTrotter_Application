@@ -2,7 +2,8 @@
 //  ViewController.swift
 //  WorldTrotter
 //
-//  Created by Brigitte on 2/2/26.
+//  Created by Brigitte on 2/2/26
+//  Updated on 2/21/26
 //
 
 import UIKit
