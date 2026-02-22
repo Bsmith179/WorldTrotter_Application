@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  ConversionViewController.swift
 //  WorldTrotter
 //
 //  Created by Brigitte on 2/2/26
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ConversionViewController: UIViewController {
 
     // override func viewDidLoad() {
         // super.viewDidLoad()
