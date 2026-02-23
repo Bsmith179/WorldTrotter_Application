@@ -62,7 +62,7 @@
                             <constraint firstItem="d4C-hd-bz8" firstAttribute="top" secondItem="C4h-LQ-2dH" secondAttribute="bottom" constant="8" id="o5B-5p-VXN"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Convert" image="thermometer" catalog="system" id="1ns-cU-6gI"/>
+                    <tabBarItem key="tabBarItem" title="Convert" image="thermometer.medium" catalog="system" id="1ns-cU-6gI"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -82,7 +82,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7dt-r1-eI3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1821.7391304347827" y="99.776785714285708"/>
+            <point key="canvasLocation" x="1748" y="100"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="k9t-ge-c7I">
@@ -95,18 +95,18 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="9GL-mO-Roa" kind="relationship" relationship="viewControllers" id="AMn-ft-Qzw"/>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="oMK-qj-lVe"/>
+                        <segue destination="9GL-mO-Roa" kind="relationship" relationship="viewControllers" id="AMn-ft-Qzw"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6F4-c3-L5L" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="911.59420289855075" y="99.776785714285708"/>
+            <point key="canvasLocation" x="928" y="100"/>
         </scene>
     </scenes>
     <resources>
         <image name="map" catalog="system" width="128" height="112"/>
-        <image name="thermometer" catalog="system" width="80" height="128"/>
+        <image name="thermometer.medium" catalog="system" width="80" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
