@@ -1,9 +1,9 @@
 //
 //  ConversionViewController.swift
 //  WorldTrotter
-//
+//  An app that runs region specific temperature conversions selectable by regions on a map.
 //  Created by Brigitte on 2/2/26
-//  Updated on 2/21/26
+//  Updated on 2/26/26
 //
 
 import UIKit
