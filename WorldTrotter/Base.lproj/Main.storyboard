@@ -67,6 +67,16 @@
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="99.776785714285708"/>
         </scene>
+        <!--Map-->
+        <scene sceneID="WZl-nh-fUX">
+            <objects>
+                <viewController title="Map" id="9GL-mO-Roa" userLabel="Map" customClass="MapViewController" customModule="WorldTrotter" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Map" image="map" catalog="system" id="Ukz-Z2-3ED" userLabel="Map"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7dt-r1-eI3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1748" y="100"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="k9t-ge-c7I">
             <objects>
@@ -79,6 +89,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="oMK-qj-lVe"/>
+                        <segue destination="9GL-mO-Roa" kind="relationship" relationship="viewControllers" id="AMn-ft-Qzw"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6F4-c3-L5L" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -87,6 +98,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="map" catalog="system" width="128" height="112"/>
         <image name="thermometer.medium" catalog="system" width="80" height="128"/>
     </resources>
 </document>
