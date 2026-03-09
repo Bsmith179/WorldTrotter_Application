@@ -2,7 +2,7 @@
 //  SceneDelegate.swift
 //  WorldTrotter
 //
-//  Created by Icy on 2/2/26.
+//  Created by Brigitte on 2/2/26.
 //
 
 import UIKit
