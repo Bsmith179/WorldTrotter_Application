@@ -4,12 +4,15 @@
 //  An app that runs region specific temperature conversions selectable by regions on a map.
 //  Created by Brigitte on 2/2/26
 //  Updated on 2/26/26
+//  Updated on 3/15/26 to add Text Input and Delegation.
 //
 
 import UIKit
 
 class ConversionViewController: UIViewController {
 
+    @IBOutlet var celsiusLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -27,6 +30,14 @@ class ConversionViewController: UIViewController {
         // firstView.addSubview(secondView)
     }
 
+    @IBAction func fahrenheitFieldEditingChanged(_ textField: UITextField) {
+        
+        if let text = textField.text, !text.isEmpty {
+            celsiusLabel.text = text
+        } else {
+            celsiusLabel.text = "???"
+        }
+    }
 
 }
 
