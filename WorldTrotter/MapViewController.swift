@@ -5,7 +5,7 @@
 //  Created by Brigitte on 2/21/26.
 //  Updated on 2/27/26 - Refactored the MapViewController to load its view programmatically.
 //  Updated on 3/09/26 - Added UILabel and UISwitch for points of interest.
-//
+//  Updated oh 3/15/26 - Localization to spanish.
 
 import UIKit
 import MapKit
@@ -25,8 +25,13 @@ class MapViewController: UIViewController {
         // Set Initial PoI Visibility
         mapView.pointOfInterestFilter = .includingAll
         
+        let standardString = NSLocalizedString("Standard", comment: "Standard map view")
+        let hybridString = NSLocalizedString("Hybrid", comment: "Hybrid map view")
+        let satelliteString
+                = NSLocalizedString("Satellite", comment: "Satellite map view")
+
         let segmentedControl
-        = UISegmentedControl(items: ["Standard", "Hybrid", "Satellite"])
+              = UISegmentedControl(items: [standardString, hybridString, satelliteString])
         segmentedControl.backgroundColor = UIColor.systemBackground
         segmentedControl.selectedSegmentIndex = 0
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
