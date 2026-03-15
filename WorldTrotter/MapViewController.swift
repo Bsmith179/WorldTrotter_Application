@@ -4,6 +4,7 @@
 //  An app that runs region specific temperature conversions selectable by regions on a map.
 //  Created by Brigitte on 2/21/26.
 //  Updated on 2/27/26 - Refactored the MapViewController to load its view programmatically.
+//  Updated on 3/09/26 - Added UILabel and UISwitch for points of interest.
 //
 
 import UIKit
@@ -19,6 +20,9 @@ class MapViewController: UIViewController {
 
         // Set it as *the* view of this view controller
         view = mapView
+        
+        // Set Initial PoI Visibility
+        mapView.pointOfInterestFilter = .includingAll
         
         let segmentedControl
                     = UISegmentedControl(items: ["Standard", "Hybrid", "Satellite"])
@@ -44,6 +48,42 @@ class MapViewController: UIViewController {
         topConstraint.isActive = true
         leadingConstraint.isActive = true
         trailingConstraint.isActive = true
+        
+        // Points of Interest Label
+        let poiLabel = UILabel()
+        poiLabel.text = "Points of Interest"
+        poiLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(poiLabel)
+        
+        // Points of Interest Switch
+        let poiSwitch = UISwitch()
+        poiSwitch.isOn = true
+        poiSwitch.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(poiSwitch)
+        
+        poiSwitch.addTarget(self,
+                            action: #selector(togglePointsOfInterest(_:)),
+                            for: .valueChanged)
+
+        // Constraints for Label and Switch
+        let labelTopConstraint =
+            poiLabel.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor,
+                                          constant: 16)
+        let labelCenterConstraint =
+            poiLabel.centerYAnchor.constraint(equalTo: poiSwitch.centerYAnchor)
+        let labelLeadingConstraint =
+            poiLabel.leadingAnchor.constraint(equalTo: margins.leadingAnchor)
+        let switchCenterConstraint =
+            poiSwitch.centerYAnchor.constraint(equalTo: poiLabel.centerYAnchor);
+        let switchLeadingConstraint =
+            poiSwitch.leadingAnchor.constraint(equalTo: poiLabel.trailingAnchor,
+                                                constant: 8)
+        
+        labelTopConstraint.isActive = true
+        labelLeadingConstraint.isActive = true
+        labelCenterConstraint.isActive = true
+        switchCenterConstraint.isActive = true
+        switchLeadingConstraint.isActive = true
     }
     
     override func viewDidLoad() {
@@ -63,6 +103,16 @@ class MapViewController: UIViewController {
         default:
             break
         }
+    }
+    
+    // Toggle Points of Interest
+    @objc func togglePointsOfInterest(_ sender: UISwitch) {
+        print("Switch toggled:", sender.isOn)
+
+        if sender.isOn {
+            mapView.pointOfInterestFilter = .includingAll
+        } else {
+            mapView.pointOfInterestFilter = .excludingAll }
     }
     
 }
