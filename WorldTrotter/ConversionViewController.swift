@@ -92,9 +92,6 @@ class ConversionViewController: UIViewController, UITextFieldDelegate {
         if string.rangeOfCharacter(from: notAllowedCharacterSet) != nil {
             return false
         }
-        
-        let currentLocale = Locale.current
-
 
         let existingTextHasDecimalSeparator
                 = textField.text?.range(of: decimalSeparator)
