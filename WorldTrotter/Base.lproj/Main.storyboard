@@ -46,11 +46,13 @@
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="decimalPad"/>
                                 <connections>
                                     <action selector="fahrenheitFieldEditingChanged:" destination="BYZ-38-t0r" eventType="editingChanged" id="XVx-XT-7zy"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="HOM-xA-3ro"/>
                                 </connections>
                             </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="0.96078431372549022" green="0.95686274509803915" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="77R-2y-y7a" firstAttribute="centerX" secondItem="rKX-4Z-dN0" secondAttribute="centerX" id="9qU-oP-jO1"/>
                             <constraint firstItem="C4h-LQ-2dH" firstAttribute="centerX" secondItem="rKX-4Z-dN0" secondAttribute="centerX" id="Bx7-cq-fLg"/>
@@ -63,13 +65,22 @@
                             <constraint firstItem="rKX-4Z-dN0" firstAttribute="top" secondItem="77R-2y-y7a" secondAttribute="bottom" constant="8" id="rAp-aO-PEz"/>
                             <constraint firstItem="llY-u2-LcW" firstAttribute="centerX" secondItem="rKX-4Z-dN0" secondAttribute="centerX" id="sgB-yO-cCw"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="JAw-4i-cJd" appends="YES" id="w2t-8X-rwG"/>
+                        </connections>
                     </view>
                     <tabBarItem key="tabBarItem" title="Convert" image="thermometer.medium" catalog="system" id="1ns-cU-6gI"/>
                     <connections>
                         <outlet property="celsiusLabel" destination="C4h-LQ-2dH" id="xtS-mh-BMI"/>
+                        <outlet property="textField" destination="77R-2y-y7a" id="uDi-OW-IUM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="JAw-4i-cJd">
+                    <connections>
+                        <action selector="dismissKeyboard:" destination="BYZ-38-t0r" id="4aL-TA-QFi"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="99.776785714285708"/>
         </scene>
