@@ -13,11 +13,12 @@ import MapKit
 class MapViewController: UIViewController {
     
     var mapView: MKMapView!
-
+    var poiSwitch: UISwitch!
+    
     override func loadView() {
         // Create a map view
         mapView = MKMapView()
-
+        
         // Set it as *the* view of this view controller
         view = mapView
         
@@ -25,25 +26,21 @@ class MapViewController: UIViewController {
         mapView.pointOfInterestFilter = .includingAll
         
         let segmentedControl
-                    = UISegmentedControl(items: ["Standard", "Hybrid", "Satellite"])
-            segmentedControl.backgroundColor = UIColor.systemBackground
-            segmentedControl.selectedSegmentIndex = 0
+        = UISegmentedControl(items: ["Standard", "Hybrid", "Satellite"])
+        segmentedControl.backgroundColor = UIColor.systemBackground
+        segmentedControl.selectedSegmentIndex = 0
+        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(segmentedControl)
         
-        segmentedControl.addTarget(self,
-                                   action: #selector(mapTypeChanged(_:)),
-                                   for: .valueChanged)
-
-            segmentedControl.translatesAutoresizingMaskIntoConstraints = false
-            view.addSubview(segmentedControl)
         
-        let topConstraint =
-            segmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
-                                                  constant: 8)
         let margins = view.layoutMarginsGuide
+        let topConstraint =
+        segmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
+                                              constant: 8)
         let leadingConstraint =
-            segmentedControl.leadingAnchor.constraint(equalTo: margins.leadingAnchor)
+        segmentedControl.leadingAnchor.constraint(equalTo: margins.leadingAnchor)
         let trailingConstraint =
-            segmentedControl.trailingAnchor.constraint(equalTo: margins.trailingAnchor)
+        segmentedControl.trailingAnchor.constraint(equalTo: margins.trailingAnchor)
         
         topConstraint.isActive = true
         leadingConstraint.isActive = true
@@ -56,63 +53,82 @@ class MapViewController: UIViewController {
         view.addSubview(poiLabel)
         
         // Points of Interest Switch
-        let poiSwitch = UISwitch()
+        poiSwitch = UISwitch()
         poiSwitch.isOn = true
         poiSwitch.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(poiSwitch)
+        poiSwitch.addTarget(self, action: #selector(updateMap(_:)), for: .valueChanged)
         
-        poiSwitch.addTarget(self,
-                            action: #selector(togglePointsOfInterest(_:)),
-                            for: .valueChanged)
-
+        
         // Constraints for Label and Switch
         let labelTopConstraint =
-            poiLabel.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor,
-                                          constant: 16)
-        let labelCenterConstraint =
-            poiLabel.centerYAnchor.constraint(equalTo: poiSwitch.centerYAnchor)
+        poiLabel.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor,
+                                      constant: 16)
         let labelLeadingConstraint =
-            poiLabel.leadingAnchor.constraint(equalTo: margins.leadingAnchor)
-        let switchCenterConstraint =
-            poiSwitch.centerYAnchor.constraint(equalTo: poiLabel.centerYAnchor);
+        poiLabel.leadingAnchor.constraint(equalTo: margins.leadingAnchor)
         let switchLeadingConstraint =
-            poiSwitch.leadingAnchor.constraint(equalTo: poiLabel.trailingAnchor,
-                                                constant: 8)
+        poiSwitch.leadingAnchor.constraint(equalTo: poiLabel.trailingAnchor,
+                                           constant: 8)
+        let switchTopConstraint =
+        poiSwitch.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor,
+                                       constant: 8)
         
         labelTopConstraint.isActive = true
         labelLeadingConstraint.isActive = true
-        labelCenterConstraint.isActive = true
-        switchCenterConstraint.isActive = true
+        switchTopConstraint.isActive = true
         switchLeadingConstraint.isActive = true
+        
+        // Action to change both controls
+        segmentedControl.addTarget(self, action: #selector(updateMap(_:)), for: .valueChanged); poiSwitch.addTarget(self, action: #selector(updateMap(_:)), for: .valueChanged)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         print("MapViewController loaded its view.")
     }
     
-    @objc func mapTypeChanged(_ segControl: UISegmentedControl) {
-        switch segControl.selectedSegmentIndex {
+    // Handler For Map And PoI Filters
+    @objc func updateMap(_ sender: Any) {
+        
+        // Determine PoI Filter From Switch
+        var poiFilter: MKPointOfInterestFilter = .includingAll
+        if let poiSwitch = view.subviews.compactMap({ $0 as? UISwitch }).first {
+            poiFilter = poiSwitch.isOn ? .includingAll : .excludingAll
+        }
+        
+        // Determine Which Map Type Is Currently Selected
+        let selectedIndex: Int
+        if let segControl = view.subviews.compactMap({ $0 as? UISegmentedControl }).first {
+            selectedIndex = segControl.selectedSegmentIndex
+        } else {
+            selectedIndex = 0
+        }
+        
+        // Show Correct Map Type And Switch Configuration
+        switch selectedIndex {
         case 0:
-            mapView.mapType = .standard
+            let config = MKStandardMapConfiguration()
+            config.pointOfInterestFilter = poiFilter
+            mapView.preferredConfiguration = config
+            poiSwitch.onTintColor = UIColor.systemGreen
+            poiSwitch.isEnabled = true
         case 1:
-            mapView.mapType = .hybrid
+            let config = MKHybridMapConfiguration()
+            config.pointOfInterestFilter = poiFilter
+            mapView.preferredConfiguration = config
+            poiSwitch.isEnabled = true
+            poiSwitch.onTintColor = UIColor.systemGreen
         case 2:
             mapView.mapType = .satellite
+            poiSwitch.isEnabled = false
+            poiSwitch.onTintColor = UIColor.systemGray
         default:
-            break
+            let config = MKStandardMapConfiguration()
+            config.pointOfInterestFilter = poiFilter
+            mapView.preferredConfiguration = config
+            poiSwitch.isEnabled = true
+            poiSwitch.onTintColor = UIColor.systemGreen
         }
+        
     }
-    
-    // Toggle Points of Interest
-    @objc func togglePointsOfInterest(_ sender: UISwitch) {
-        print("Switch toggled:", sender.isOn)
-
-        if sender.isOn {
-            mapView.pointOfInterestFilter = .includingAll
-        } else {
-            mapView.pointOfInterestFilter = .excludingAll }
-    }
-    
 }
