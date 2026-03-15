@@ -5,6 +5,7 @@
 //  Created by Brigitte on 2/2/26
 //  Updated on 2/26/26
 //  Updated on 3/15/26 to add Text Input and Delegation.
+//  Updated on 3/15/26 to complete "Lab 6 Bronze Challenge - Character Validation".
 //
 
 import UIKit
@@ -34,7 +35,7 @@ class ConversionViewController: UIViewController, UITextFieldDelegate {
         print("ConversionViewController loaded its view.")
         
         textField.delegate = self
-        
+
         updateCelsiusLabel()
         
         // let firstFrame = CGRect(x: 160, y: 240, width: 100, height: 150)
@@ -82,6 +83,14 @@ class ConversionViewController: UIViewController, UITextFieldDelegate {
     func textField(_ textField: UITextField,
                    shouldChangeCharactersIn range: NSRange,
                    replacementString string: String) -> Bool {
+        
+        // Create Acceptable Character Set And Reject Invalid Entries
+        let allowedCharacterSet = CharacterSet(charactersIn: "0123456789.")
+        let notAllowedCharacterSet = allowedCharacterSet.inverted
+        
+        if string.rangeOfCharacter(from: notAllowedCharacterSet) != nil {
+            return false
+        }
         
         let existingTextHasDecimalSeparator = textField.text?.range(of: ".")
         let replacementTextHasDecimalSeparator = string.range(of: ".")
