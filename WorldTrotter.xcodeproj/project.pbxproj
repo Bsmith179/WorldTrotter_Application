@@ -30,6 +30,7 @@
 /* Begin PBXFileReference section */
 		28C4631E2F670B7300255C47 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		28C463212F670B8200255C47 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		28C463232F6713C800255C47 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
 		28CCAF122F31083E005E5389 /* WorldTrotter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorldTrotter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28CCAF282F31083F005E5389 /* WorldTrotterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorldTrotterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		28CCAF322F31083F005E5389 /* WorldTrotterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorldTrotterUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -213,6 +214,7 @@
 				en,
 				Base,
 				es,
+				ar,
 			);
 			mainGroup = 28CCAF092F31083E005E5389;
 			minimizedProjectReferenceProxies = 1;
@@ -296,6 +298,7 @@
 			children = (
 				28C4631E2F670B7300255C47 /* es */,
 				28C463212F670B8200255C47 /* en */,
+				28C463232F6713C800255C47 /* ar */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
