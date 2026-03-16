@@ -6,6 +6,8 @@
 //  Updated on 2/26/26
 //  Updated on 3/15/26 to add Text Input and Delegation.
 //  Updated on 3/15/26 to complete "Lab 6 Bronze Challenge - Character Validation".
+//  Updated on 3/15/26 to add Spanish Language Translation
+//  Updated on 3/16/26 to add Arabic language translation.
 //
 
 import UIKit
@@ -66,6 +68,7 @@ class ConversionViewController: UIViewController, UITextFieldDelegate {
     let numberFormatter: NumberFormatter = {
         let nf = NumberFormatter()
         nf.numberStyle = .decimal
+        nf.locale = Locale.autoupdatingCurrent
         nf.minimumFractionDigits = 0
         nf.maximumFractionDigits = 1
         return nf
@@ -85,24 +88,24 @@ class ConversionViewController: UIViewController, UITextFieldDelegate {
                    replacementString string: String) -> Bool {
         
         // Create Acceptable Character Set And Reject Invalid Entries
-        let decimalSeparator = Locale.current.decimalSeparator ?? "."
-        let allowedCharacterSet = CharacterSet(charactersIn: "0123456789\(decimalSeparator)")
+        let allowedDigits = "0123456789٠١٢٣٤٥٦٧٨٩"
+        let allowedDecimalSeparators = [Locale.current.decimalSeparator ?? ".", "٫"]
+        let allowedCharacterSet = CharacterSet(charactersIn: allowedDigits + allowedDecimalSeparators.joined())
         let notAllowedCharacterSet = allowedCharacterSet.inverted
         
         if string.rangeOfCharacter(from: notAllowedCharacterSet) != nil {
             return false
         }
 
-        let existingTextHasDecimalSeparator
-                = textField.text?.range(of: decimalSeparator)
-        let replacementTextHasDecimalSeparator = string.range(of: decimalSeparator)
-        
-        if existingTextHasDecimalSeparator != nil,
-           replacementTextHasDecimalSeparator != nil {
-            return false
-        } else {
-            return true
+        let existingTextHasDecimalSeparator = allowedDecimalSeparators.contains {
+            textField.text?.contains($0) ?? false
         }
+
+        let replacementTextHasDecimalSeparator = allowedDecimalSeparators.contains {
+            string.contains($0)
+        }
+        
+        return !(existingTextHasDecimalSeparator && replacementTextHasDecimalSeparator)
     }
     
 }
